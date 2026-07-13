@@ -1,0 +1,40 @@
+name: Build Pirch98 Executable
+
+on:
+  push:
+    branches: [ "main" ] # ทำงานอัตโนมัติเมื่อมีการอัปเดตโค้ดเข้าเซกชัน main
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-windows:
+    runs-on: windows-latest # สั่งให้ระบบใช้ระบบปฏิบัติการ Windows ในการสร้างไฟล์
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11' # เวอร์ชั่น Python ที่ต้องการใช้
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install PyQt6 pyinstaller
+        pip install pyinstaller
+        pip install requests
+
+        # ถ้าโปรแกรมของคุณมี Library อื่นๆ ที่ต้องใช้ ให้พิมพ์ pip install เพิ่มต่อตรงนี้ได้เลยครับ
+
+    - name: Build Executable with PyInstaller
+      run: |
+        pyinstaller --clean --noconsole --onefile irc_client.py
+        # หมายเหตุ: ถ้าไฟล์หลักของคุณไม่ได้ชื่อ main.py ให้เปลี่ยนคำว่า main.py เป็นชื่อไฟล์ของคุณนะครับ
+
+    - name: Upload Windows Executable artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: Pirch98-Windows-App
+        path: dist/*.exe # เก็บไฟล์ .exe ที่สร้างเสร็จแล้วส่งออกมาให้เราดาวน์โหลด

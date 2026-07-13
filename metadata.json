@@ -1,0 +1,6 @@
+{
+  "name": "pIRCH IRC Client",
+  "description": "A secure, gorgeous cyberpunk dark-neon Web IRC client with standard RPL_NAMREPLY (353) parsing, rank segregation, private messages, and secure URL-safe memory credentials.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
