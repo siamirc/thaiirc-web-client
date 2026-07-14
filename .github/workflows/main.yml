@@ -39,5 +39,3 @@ jobs:
         name: Pirch98-Windows-App
         path: dist/*.exe # เก็บไฟล์ .exe ที่สร้างเสร็จแล้วส่งออกมาให้เราดาวน์โหลด
         index.html
-
-
